@@ -25,16 +25,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const inference = new HfInference("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");  // Replace with your actual API key
+const inference = new HfInference("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");
 
 
 
 app.post('/generate-plan', async (req, res) => {
     const { subject, level, duration, goals } = req.body;
-
-    // if (!userId) {
-    //     return res.status(401).json({ error: 'User ID is required' });
-    // }
 
     const prompt = `Generate a personalized study plan for the following:
     Subject: ${subject}
