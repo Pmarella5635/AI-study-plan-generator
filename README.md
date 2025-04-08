@@ -21,6 +21,6 @@ AI-driven personalized study plan generator with progress tracking.
 - React.js
 - Node.js
 - Firebase Authentication & Firestore
-- Gemini API for AI-powered recommendations
+- HuggingFace API for AI-powered recommendations
 - Bootstrap
 
