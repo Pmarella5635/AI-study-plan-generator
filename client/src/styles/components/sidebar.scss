@@ -1,0 +1,84 @@
+// client/src/styles/components/sidebar.scss
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  padding-top: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1020;
+  transition: all 0.3s;
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      color: #666;
+    }
+  }
+  
+  .sidebar-link {
+    color: #495057;
+    transition: all 0.2s;
+    border-radius: 0;
+    margin-bottom: 5px;
+    
+    &:hover {
+      background-color: rgba(67, 97, 238, 0.05);
+      color: $primary;
+    }
+    
+    &.active {
+      background-color: rgba(67, 97, 238, 0.1);
+      color: $primary;
+      font-weight: 500;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background-color: $primary;
+      }
+    }
+  }
+  
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    
+    .upgrade-notice {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  @media (max-width: 991px) {
+    transform: translateX(-100%);
+    
+    &.show {
+      transform: translateX(0);
+    }
+  }
+}
