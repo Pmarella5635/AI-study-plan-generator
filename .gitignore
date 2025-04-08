@@ -7,7 +7,7 @@ yarn-debug.log*
 yarn-error.log*
 build
 dist
-firebase-service-account.json
+study-plan-okcu-firebase-adminsdk.json
 .vscode
 package-lock.json
 
