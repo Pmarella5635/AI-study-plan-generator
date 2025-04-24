@@ -1,5 +1,5 @@
 // client/src/components/common/Sidebar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { FaHome, FaPlus, FaHistory, FaUser } from 'react-icons/fa';
@@ -8,10 +8,15 @@ import { useAuth } from '../../contexts/AuthContext';
 const Sidebar = () => {
   const location = useLocation();
   const { currentUser } = useAuth();
+  const [imageError, setImageError] = useState(false);
   
   // Check if the path is active
   const isActive = (path) => {
     return location.pathname === path;
+  };
+  
+  const handleImageError = () => {
+    setImageError(true);
   };
   
   if (!currentUser) return null;
@@ -20,13 +25,14 @@ const Sidebar = () => {
     <div className="sidebar d-none d-lg-block">
       <div className="sidebar-sticky">
         <div className="sidebar-header p-3 mb-3 text-center">
-          {currentUser.photoURL ? (
+          {currentUser.photoURL && !imageError ? (
             <img 
               src={currentUser.photoURL} 
               alt="Profile" 
               className="rounded-circle mb-2" 
               width="60" 
               height="60" 
+              onError={handleImageError}
             />
           ) : (
             <div className="user-avatar mb-2">
@@ -67,8 +73,6 @@ const Sidebar = () => {
             <span>History</span>
           </Nav.Link>
         </Nav>
-        
-       
       </div>
     </div>
   );
