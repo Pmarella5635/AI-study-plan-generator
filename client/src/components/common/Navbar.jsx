@@ -1,12 +1,14 @@
 // client/src/components/common/Navbar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Navbar as BootstrapNavbar, Container, Nav, NavDropdown, Image } from 'react-bootstrap';
+import { FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -17,6 +19,10 @@ const Navbar = () => {
     }
   };
 
+  const handleImageError = () => {
+     setImageError(true);
+   };
+ 
   return (
     <BootstrapNavbar bg="primary" variant="dark" expand="lg" className="navbar-main">
       <Container>
@@ -38,7 +44,7 @@ const Navbar = () => {
                 <NavDropdown
                   title={
                     <span>
-                      {currentUser.photoURL && (
+                      {currentUser.photoURL && !imageError ? (
                         <Image
                           src={currentUser.photoURL}
                           alt="Profile"
@@ -46,8 +52,13 @@ const Navbar = () => {
                           className="me-2"
                           width="24"
                           height="24"
+                          onError={handleImageError}
                         />
-                      )}
+                      ) : (
+                         <span className="avatar-placeholder me-2">
+                           <FaUser size={16} />
+                         </span>
+                    )}
                       {currentUser.displayName || currentUser.email}
                     </span>
                   }
